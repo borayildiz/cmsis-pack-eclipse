@@ -3,10 +3,7 @@ package com.bora.logger.file;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-
 import java.io.IOException;
-
-
 
 /*
  * Logs the cmsis plugin 
@@ -24,12 +21,8 @@ public class Log {
 		String name = Thread.currentThread().getStackTrace()[2].getMethodName();	
 		String fileName = Thread.currentThread().getStackTrace()[2].getFileName();
 		String className = Thread.currentThread().getStackTrace()[2].getClassName();
-		
-		
-		
-		writeToFile("Method Call:		" + "Method Name: " + name + ", " + "Class Name: " + className + ", " + "File Name: " + fileName);
-		
-		
+		writeToFile("Method Call:		" + "Method Name: " + name + ", " + 
+			    "Class Name: " + className + ", " + "File Name: " + fileName);
 	}
 	
 	/*
@@ -37,11 +30,7 @@ public class Log {
 	 */
 	public static void writeCurrentMethod(){
 		String name = Thread.currentThread().getStackTrace()[2].getMethodName();	
-		
 		writeToFile("Method Call:		" + name + "()");
-		
-		
-		
 	}	
 	
 	/*
@@ -55,10 +44,7 @@ public class Log {
 			parameters += arguments[i]; 
 			if( i != (arguments.length - 1)) parameters += ", ";
 		}
-		
 		writeToFile("Method Call:		" + name + "("  + parameters + ")");
-		
-	
 	}	
 	
 	/*
@@ -66,8 +52,6 @@ public class Log {
 	 */
 	public static void writeCurrentConstructor(String constructorName){	
 		writeToFile("Constructor Call:	" + constructorName);
-		
-		
 	}	
 	
 	/*
@@ -85,8 +69,6 @@ public class Log {
 			stackInfo = "Stack" + i + ": " + name; 
 			writeToFile(stackInfo);
 		}	
-		
-	
 	}
 	
 	
@@ -94,9 +76,7 @@ public class Log {
 	 * Writes to the log file
 	 */
 	public static void writeToFile(String textLine){
-		
 		logID++;
-		
 		FileWriter write = null;
 		
 		try {
@@ -105,13 +85,10 @@ public class Log {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		PrintWriter print_line = new PrintWriter(write);
-		
 		print_line.printf("%s" + "%n", (logID + "#	" + textLine));
-				
 		print_line.close();
-		
-		
 	}
 	
 	
@@ -119,7 +96,6 @@ public class Log {
 	 * Clear the log file
 	 */
 	public static void clear(){
-		
 		PrintWriter writer = null;
 		
 		try {
@@ -131,9 +107,6 @@ public class Log {
 		
 		writer.print("");
 		writer.close();
-		
-		
-		
 	}
 
 }
