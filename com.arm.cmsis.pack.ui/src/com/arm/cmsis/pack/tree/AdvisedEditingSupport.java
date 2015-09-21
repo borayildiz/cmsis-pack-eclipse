@@ -28,6 +28,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Control;
 
+import com.bora.logger.file.Log;
+
 
 /**
  * This class implements editing possibilities for table cell, e.g. check box, combo box, etc.
@@ -46,10 +48,15 @@ public class AdvisedEditingSupport extends EditingSupport {
 		super(treeViewer);
 		this.columnIndex = columnIndex;
 		this.columnAdvisor = columnAdvisor;
+		
+		Log.writeCurrentConstructor("AdvisedEditingSupport(TreeViewer treeViewer, IColumnAdvisor columnAdvisor, int columnIndex)");
 	}
 	
 	@Override
 	protected CellEditor getCellEditor(final Object element) {
+		
+		//Log.writeCurrentMethod(element);
+		
 		final TreeViewer treeViewer = (TreeViewer)getViewer();
 		
 		switch (columnAdvisor.getCellControlType(element, columnIndex)) {
@@ -93,6 +100,8 @@ public class AdvisedEditingSupport extends EditingSupport {
 	@Override
 	protected Object getValue(Object element) {
 		
+		//Log.writeCurrentMethod(element);
+		
 		switch (columnAdvisor.getCellControlType(element, columnIndex)) {
 		case CHECK:
 			return new Boolean(columnAdvisor.getCheck(element, columnIndex));
@@ -107,6 +116,9 @@ public class AdvisedEditingSupport extends EditingSupport {
 
 	@Override
 	protected void setValue(Object element, Object value) {
+		
+		//Log.writeCurrentMethod(element, value);
+		
 		switch (columnAdvisor.getCellControlType(element, columnIndex)) {
 		case CHECK:
 			if (value instanceof Boolean) { 
@@ -133,6 +145,9 @@ public class AdvisedEditingSupport extends EditingSupport {
 
 	@Override
 	protected boolean canEdit(Object element) {
+		
+		//Log.writeCurrentMethod(element);
+		
 		boolean editable = columnAdvisor.canEdit(element, columnIndex);
 		if (!editable) {
 			// send propertyChange

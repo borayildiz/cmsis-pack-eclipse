@@ -8,12 +8,14 @@
             class="com.arm.cmsis.pack.ui.preferences.CpPreferenceInitializer">
       </initializer>
    </extension>
+   
+   
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
             class="com.arm.cmsis.pack.ui.preferences.CpPreferencePage"
             id="com.arm.cmsis.pack.ui.CpPreferencePage"
-            name="CMSIS Packs">
+            name="***PageName*** CMSIS Packs">
       </page>
    </extension>
 

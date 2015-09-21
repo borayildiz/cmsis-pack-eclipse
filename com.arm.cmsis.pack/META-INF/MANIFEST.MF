@@ -20,3 +20,4 @@ Export-Package: com.arm.cmsis.pack,
  com.arm.cmsis.pack.rte.devices,
  com.arm.cmsis.pack.utils
 Require-Bundle: org.eclipse.core.runtime
+Import-Package: com.bora.logger.file

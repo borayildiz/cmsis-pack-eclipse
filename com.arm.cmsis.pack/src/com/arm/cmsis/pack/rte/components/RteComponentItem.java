@@ -28,6 +28,7 @@ import com.arm.cmsis.pack.enums.EComponentAttribute;
 import com.arm.cmsis.pack.enums.EEvaluationResult;
 import com.arm.cmsis.pack.generic.IAttributes;
 import com.arm.cmsis.pack.info.ICpComponentInfo;
+import com.bora.logger.file.Log;
 import com.arm.cmsis.pack.rte.IRteDependency;
 import com.arm.cmsis.pack.utils.AlnumComparator;
 
@@ -56,7 +57,6 @@ public class RteComponentItem extends CmsisMapItem<IRteComponentItem> implements
 	 */
 	public RteComponentItem(IRteComponentItem parent, final String name) {
 		super(parent, name);
-		
 	}
 
 

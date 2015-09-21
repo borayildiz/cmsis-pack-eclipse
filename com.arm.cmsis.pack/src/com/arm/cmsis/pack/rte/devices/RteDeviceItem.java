@@ -27,8 +27,11 @@ import com.arm.cmsis.pack.data.ICpItem;
 import com.arm.cmsis.pack.data.ICpPack;
 import com.arm.cmsis.pack.enums.EDeviceHierarchyLevel;
 import com.arm.cmsis.pack.generic.IAttributes;
+import com.bora.logger.file.Log;
 import com.arm.cmsis.pack.utils.AlnumComparator;
 import com.arm.cmsis.pack.utils.Vendor;
+import javax.swing.JOptionPane;
+
 
 /**
  * Default implementation of IRteDeviceItem 
@@ -43,6 +46,8 @@ public class RteDeviceItem extends CmsisMapItem<IRteDeviceItem> implements IRteD
 	 */
 	public RteDeviceItem() {
 		fLevel = EDeviceHierarchyLevel.ROOT.ordinal();
+		
+		Log.writeCurrentConstructor("RteDeviceItem()");
 	}
 
 	/**
@@ -52,8 +57,15 @@ public class RteDeviceItem extends CmsisMapItem<IRteDeviceItem> implements IRteD
 		super(parent);
 		fLevel = level;
 		fName= name;
+		
+		Log.writeCurrentConstructor("RteDeviceItem(String name, int level, IRteDeviceItem parent)");
+		
 	}
 
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }	
 	
 	@Override
 	protected Map<String, IRteDeviceItem> createMap() {

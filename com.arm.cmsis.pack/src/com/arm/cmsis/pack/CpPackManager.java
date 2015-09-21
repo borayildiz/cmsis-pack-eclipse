@@ -24,6 +24,7 @@ import com.arm.cmsis.pack.data.ICpPack;
 import com.arm.cmsis.pack.data.ICpPackCollection;
 import com.arm.cmsis.pack.events.IRteEventProxy;
 import com.arm.cmsis.pack.events.RteEvent;
+import com.bora.logger.file.Log;
 import com.arm.cmsis.pack.parser.ICpXmlParser;
 import com.arm.cmsis.pack.parser.PdscParser;
 import com.arm.cmsis.pack.rte.devices.IRteDeviceItem;
@@ -62,11 +63,14 @@ public class CpPackManager implements ICpPackManager {
 	
 	@Override
 	public boolean initParser(String xsdFile){
+		
 		if(pdscParser == null)
 			pdscParser = new PdscParser(xsdFile);
 		else
 			pdscParser.setXsdFile(xsdFile);
 		return pdscParser.init();
+		
+		
 	}
 
 	@Override
@@ -93,7 +97,7 @@ public class CpPackManager implements ICpPackManager {
 	
 	@Override
 	public IRteDeviceItem getDevices() {
-		getPacks(); // ensure packs are loade
+		getPacks(); // ensure packs are loaded
 		if(allDevices == null && bPacksLoaded)  {
 			allDevices = RteDeviceItem.createTree(packs.getLatestPacks());
 		}

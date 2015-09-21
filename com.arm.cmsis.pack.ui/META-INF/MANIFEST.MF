@@ -21,7 +21,8 @@ Import-Package: com.arm.cmsis.pack,
  com.arm.cmsis.pack.info,
  com.arm.cmsis.pack.rte,
  com.arm.cmsis.pack.rte.components,
- com.arm.cmsis.pack.rte.devices
+ com.arm.cmsis.pack.rte.devices,
+ com.bora.logger.file
 Require-Bundle: org.eclipse.jface,
  org.eclipse.jface.text;bundle-version="3.9.0",
  org.eclipse.osgi,

@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import com.arm.cmsis.pack.generic.IAttributes;
+import com.bora.logger.file.Log;
 import com.arm.cmsis.pack.ui.CpPlugInUI;
 
 /**
@@ -27,12 +28,16 @@ import com.arm.cmsis.pack.ui.CpPlugInUI;
 public class CpPreferenceInitializer extends AbstractPreferenceInitializer {
 	/**
 	 * Default constructor 
+	 * 
 	 */
-	public CpPreferenceInitializer() {
+	public CpPreferenceInitializer(){
+		Log.writeCurrentConstructor("CpPreferenceInitializer()");
 	}
 
 	@Override
 	public void initializeDefaultPreferences() {
+		Log.writeCurrentMethodDetail();
+		
 		IPreferenceStore store = CpPlugInUI.getDefault().getPreferenceStore();
 		store.setDefault(CpPlugInUI.CMSIS_PACK_ROOT_PREFERENCE, IAttributes.EMPTY_STRING);
 	}

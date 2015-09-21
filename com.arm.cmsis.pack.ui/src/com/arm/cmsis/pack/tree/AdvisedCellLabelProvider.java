@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TreeItem;
 
+import com.bora.logger.file.Log;
 import com.arm.cmsis.pack.tree.IColumnAdvisor.CellControlType;
 import com.arm.cmsis.pack.ui.CpPlugInUI;
 
@@ -55,11 +56,14 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 	public AdvisedCellLabelProvider(IColumnAdvisor columnAdviser, int colIndex) {
 		this.columnAdvisor = columnAdviser;
 		this.columnIndex = colIndex;
+		
+		Log.writeCurrentConstructor("AdvisedCellLabelProvider(IColumnAdvisor columnAdviser, int colIndex)");
 	}
 	
 	@Override
 	public void dispose() {
-		super.dispose();
+		super.dispose();	
+		//Log.writeCurrentMethod();
 	}
 
 	@Override
@@ -77,6 +81,8 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 			super.paint(event, element); 	// draw only URL text
 			break;
 		}
+		
+		//Log.writeCurrentMethod(event, element);
 	}
 
 	@Override
@@ -100,6 +106,8 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 				handleMouseOver(e);
 			}
 		});
+		
+		//Log.writeCurrentMethod(viewer, column);
 	}
 
 	/**
@@ -127,6 +135,8 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 		if (!cursorSet) {
 			handleMouseExit(e);
 		}
+		
+		//Log.writeCurrentMethod(e);
 	}
 
 	/**
@@ -139,6 +149,8 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 		if (this.control.getCursor() == CURSOR_HAND) {
 			this.control.setCursor(null);
 		}
+		
+		//Log.writeCurrentMethod(e);
 	}
 
 	/**
@@ -159,6 +171,8 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 
 		event.gc.drawImage(image, imageBounds.x, imageBounds.y, imageBounds.width, imageBounds.height,
 				dstX, dstY, imageBounds.width, imageBounds.height);
+		
+		//Log.writeCurrentMethod(event, element);
 	}
 
 	/**
@@ -178,6 +192,8 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 			event.gc.drawLine(x - 1, y + extent.y, x + extent.x - 1, y
 					+ extent.y);
 		}
+		
+		//Log.writeCurrentMethod(event, element);
 	}
 
 	/**
@@ -192,6 +208,9 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 		if (treeItem != null) {
 			cellBounds = treeItem.getBounds(event.index);
 		}
+		
+		//Log.writeCurrentMethod(event);
+		
 		return cellBounds;
 	}
 
@@ -203,6 +222,9 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 		// may be null if outside the UI thread
 		if (display == null)
 			display = Display.getDefault();
+		
+		//Log.writeCurrentMethod();
+		
 		return display;
 	}
 
@@ -233,10 +255,17 @@ public class AdvisedCellLabelProvider extends StyledCellLabelProvider {
 			break;
 		}
 		super.update(cell);
+		
+		//Log.writeCurrentMethod(cell);
+		
 	}
 
 	@Override
 	public String getToolTipText(Object element) {
+		
+		//Log.writeCurrentMethod(element);
+		
 		return columnAdvisor.getTooltipText(element, columnIndex);
+		
 	}
 }

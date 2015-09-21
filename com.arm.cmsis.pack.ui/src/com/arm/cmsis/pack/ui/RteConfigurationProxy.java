@@ -29,6 +29,7 @@ import com.arm.cmsis.pack.events.IRteEventListener;
 import com.arm.cmsis.pack.events.IRteEventProxy;
 import com.arm.cmsis.pack.info.ICpConfigurationInfo;
 import com.arm.cmsis.pack.info.ICpDeviceInfo;
+import com.bora.logger.file.Log;
 import com.arm.cmsis.pack.rte.IRteConfiguration;
 import com.arm.cmsis.pack.rte.IRteDependencyItem;
 import com.arm.cmsis.pack.rte.components.IRteComponent;
@@ -52,6 +53,8 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 		fConfiguration = configuration;
 		if(fConfiguration != null)
 			fConfiguration.setRteEventProxy(this);
+		
+		Log.writeCurrentConstructor("RteConfigurationProxy(IRteConfiguration configuration)");
 	}
 
 
@@ -60,11 +63,16 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 		// TODO: provide a layer for tier proxies 
 		if(fConfiguration != null)
 			fConfiguration.setRteEventProxy(rteEventProxy);
+		
+		Log.writeCurrentMethod(rteEventProxy);
 	}
 
 
 	@Override
 	public IRteEventProxy getRteEventProxy() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getRteEventProxy();
 		return null;
@@ -72,6 +80,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void clear() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			fConfiguration.clear();
 	}
@@ -79,6 +90,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public ICpPackFilter getPackFilter() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getPackFilter();
 		return null;
@@ -87,6 +101,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public ICpDeviceItem getDevice() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getDevice();
 		return null;
@@ -95,6 +112,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public ICpDeviceInfo getDeviceInfo() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getDeviceInfo();
 		return null; 
@@ -103,6 +123,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void setDeviceInfo(ICpDeviceInfo deviceInfo) {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			fConfiguration.setDeviceInfo(deviceInfo);
 	}
@@ -110,6 +133,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public IRteComponentItem getComponents() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getComponents();
 		return null;
@@ -118,6 +144,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public EEvaluationResult evaluateDependencies() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.evaluateDependencies();
 		return EEvaluationResult.UNDEFINED;
@@ -125,6 +154,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public Collection<IRteComponent> getSelectedComponents() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getSelectedComponents();
 		return null;
@@ -133,6 +165,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public Collection<IRteComponent> getUsedComponents() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getUsedComponents();
 		return null;
@@ -141,6 +176,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void selectComponent(IRteComponent component, int nInstances) {
+		
+		Log.writeCurrentMethod(component, nInstances);
+		
 		if(fConfiguration != null)
 			fConfiguration.selectComponent(component, nInstances);
 	}
@@ -148,6 +186,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void selectActiveChild(IRteComponentItem item, String childName) {
+		
+		Log.writeCurrentMethod(item, childName);
+		
 		if(fConfiguration != null)
 			fConfiguration.selectActiveChild(item, childName);
 	}
@@ -155,6 +196,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void selectActiveVariant(IRteComponentItem item, String variant) {
+		
+		Log.writeCurrentMethod(item, variant);
+		
 		if(fConfiguration != null)
 			fConfiguration.selectActiveVariant(item, variant);
 	}
@@ -162,6 +206,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void selectActiveVendor(IRteComponentItem item, String vendor) {
+		
+		Log.writeCurrentMethod(item, vendor);
+		
 		if(fConfiguration != null)
 			fConfiguration.selectActiveVendor(item, vendor);
 	}
@@ -169,6 +216,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void selectActiveVersion(IRteComponentItem item, String version) {
+		
+		Log.writeCurrentMethod(item, version);
+		
 		if(fConfiguration != null)
 			fConfiguration.selectActiveVersion(item, version);
 	}
@@ -176,22 +226,34 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void processRteEvent(RteEvent event) {
+		
+		Log.writeCurrentMethod(event);
+		
 		fireRteEvent(event);
 	}
 
 	@Override
 	public void addRteEventListener(IRteEventListener listener) {
+		
+		Log.writeCurrentMethod(listener);
+		
 		fRteListeners.add(listener);
 	}
 
 
 	@Override
 	public void removeRteEventListener(IRteEventListener listener) {
+		
+		Log.writeCurrentMethod(listener);
+		
 		fRteListeners.remove(listener);
 	}
 
 	@Override
 	public void fireRteEvent(RteEvent event) {
+		
+		Log.writeCurrentMethod(event);
+		
 		for (Object obj : fRteListeners.getListeners()) {
 			IRteEventListener listener = (IRteEventListener) obj;
 			try {
@@ -205,6 +267,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public EEvaluationResult getEvaluationResult(IRteComponentItem item) {
+		
+		Log.writeCurrentMethod(item);
+		
 		if(fConfiguration != null)
 			return fConfiguration.getEvaluationResult(item);
 		return EEvaluationResult.UNDEFINED;
@@ -213,6 +278,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public EEvaluationResult getEvaluationResult() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getEvaluationResult();
 		return EEvaluationResult.UNDEFINED;
@@ -221,6 +289,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void setEvaluationResult(EEvaluationResult result) {
+		
+		Log.writeCurrentMethod(result);
+		
 		if(fConfiguration != null)		
 			fConfiguration.setEvaluationResult(result);
 		
@@ -228,6 +299,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public Collection<? extends IRteDependencyItem> getDependencyItems() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getDependencyItems();
 		return null;
@@ -236,6 +310,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public EEvaluationResult resolveDependencies() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.resolveDependencies();
 		return null;
@@ -244,6 +321,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public ICpConfigurationInfo getConfigurationInfo() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getConfigurationInfo();
 		return null;
@@ -252,6 +332,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 	
 	@Override
 	public void setConfigurationInfo(ICpConfigurationInfo info) {
+		
+		Log.writeCurrentMethod(info);
+		
 		if(fConfiguration != null)
 			fConfiguration.setConfigurationInfo(info);
 	}
@@ -259,6 +342,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public ICpItem getToolchainInfo() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			return fConfiguration.getToolchainInfo();
 		return null;
@@ -267,6 +353,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void setToolchainInfo(ICpItem toolchainInfo) {
+		
+		Log.writeCurrentMethod(toolchainInfo);
+		
 		if(fConfiguration != null)
 			fConfiguration.setToolchainInfo(toolchainInfo);
 	}
@@ -274,6 +363,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void setFilterAttributes(ICpDeviceInfo deviceInfo, ICpItem toolchainInfo) {
+		
+		Log.writeCurrentMethod(deviceInfo, toolchainInfo);
+		
 		if(fConfiguration != null)
 			fConfiguration.setFilterAttributes(deviceInfo, toolchainInfo);
 	}
@@ -281,6 +373,9 @@ public class RteConfigurationProxy implements IRteConfigurationProxy {
 
 	@Override
 	public void apply() {
+		
+		Log.writeCurrentMethod();
+		
 		if(fConfiguration != null)
 			fConfiguration.apply();
 	}
