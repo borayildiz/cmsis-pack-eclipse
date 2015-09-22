@@ -15,7 +15,7 @@
       <page
             class="com.arm.cmsis.pack.ui.preferences.CpPreferencePage"
             id="com.arm.cmsis.pack.ui.CpPreferencePage"
-            name="***PageName*** CMSIS Packs">
+            name="CMSIS Packs">
       </page>
    </extension>
 

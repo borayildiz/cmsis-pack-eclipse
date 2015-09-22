@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-/*
- * Logs the cmsis plugin 
+/**
+ * Logs the executed methods, constructors or stack info
  */
 public class Log {
 	
@@ -14,18 +14,18 @@ public class Log {
 	private static boolean append_to_file = true;
 	private static int logID = 0;
 	
-	/*
-	 * Log the current executed method detail
+	/**
+	 * Log the current executed method in detail
 	 */
 	public static void writeCurrentMethodDetail(){
 		String name = Thread.currentThread().getStackTrace()[2].getMethodName();	
 		String fileName = Thread.currentThread().getStackTrace()[2].getFileName();
 		String className = Thread.currentThread().getStackTrace()[2].getClassName();
 		writeToFile("Method Call:		" + "Method Name: " + name + ", " + 
-			    "Class Name: " + className + ", " + "File Name: " + fileName);
+			    	"Class Name: " + className + ", " + "File Name: " + fileName);
 	}
 	
-	/*
+	/**
 	 * Log the current executed method name
 	 */
 	public static void writeCurrentMethod(){
@@ -33,8 +33,9 @@ public class Log {
 		writeToFile("Method Call:		" + name + "()");
 	}	
 	
-	/*
-	 * Log the current executed method and parameter
+	/**
+	 * @param arguments
+	 * Log the current executed method name with parameters
 	 */
 	public static void writeCurrentMethod(Object...arguments){
 		String name = Thread.currentThread().getStackTrace()[2].getMethodName();	
@@ -47,15 +48,16 @@ public class Log {
 		writeToFile("Method Call:		" + name + "("  + parameters + ")");
 	}	
 	
-	/*
-	 * Log the current executed constructor
+	/**
+	 * @param constructorName
+	 * Log the current executed constructor name
 	 */
 	public static void writeCurrentConstructor(String constructorName){	
 		writeToFile("Constructor Call:	" + constructorName);
 	}	
 	
-	/*
-	 * Log the stack info
+	/**
+	 * Log the stack info of the current method
 	 */
 	public static void writeStackInfo(){
 		int stackCount = Thread.currentThread().getStackTrace().length;
@@ -72,7 +74,8 @@ public class Log {
 	}
 	
 	
-	/*
+	/**
+	 * @param textLine
 	 * Writes to the log file
 	 */
 	public static void writeToFile(String textLine){

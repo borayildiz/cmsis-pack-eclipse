@@ -21,21 +21,9 @@ import org.eclipse.swt.SWT;
 import com.bora.logger.file.Log;
 
 /**
- * This sample class demonstrates how to plug-in a new
- * workbench view. The view shows data obtained from the
- * model. The sample creates a dummy model on the fly,
- * but a real implementation would connect to the model
- * available either in this or another plug-in (e.g. the workspace).
- * The view is connected to the model using a content provider.
- * <p>
- * The view uses a label provider to define how model
- * objects should be presented in the view. Each
- * view can present the same model objects using
- * different labels and icons, if needed. Alternatively,
- * a single label provider can be shared between views
- * in order to ensure that objects of the same type are
- * presented in the same way everywhere.
- * <p>
+ * This ListView just shows the path file content as a list.
+ * There are two actions which are (i):refresh the list, (x):clear the list.
+ * This class is adapted from ListView example in PDE.
  */
 
 public class ListView extends ViewPart {
@@ -46,6 +34,7 @@ public class ListView extends ViewPart {
 	public static final String ID = "com.bora.exercises.listview.views.ListView";
 
 	public static TableViewer viewer;
+	private static String path = "log.txt";
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
@@ -55,19 +44,8 @@ public class ListView extends ViewPart {
 	 */
 	public ListView() {
 	}	
-	
-
-	/*
-	 * The content provider class is responsible for
-	 * providing objects to the view. It can wrap
-	 * existing objects in adapters or simply return
-	 * objects as-is. These objects may be sensitive
-	 * to the current input of the view, or ignore
-	 * it and always show the same content 
-	 * (like Task List, for example).
-	 */
-	
-	/*
+		
+	/**
 	 * View Content Provider
 	 */
 	class ViewContentProvider implements IStructuredContentProvider {
@@ -87,7 +65,7 @@ public class ListView extends ViewPart {
 			
 
 			try {
-				for (String line : Files.readAllLines(Paths.get("log.txt"))) {
+				for (String line : Files.readAllLines(Paths.get(path))) {
 					inputList.add(line);	
 				}
 			
@@ -106,7 +84,7 @@ public class ListView extends ViewPart {
 	
 	
 	
-	/*
+	/**
 	 * View Label Provider
 	 */
 	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
@@ -131,7 +109,7 @@ public class ListView extends ViewPart {
 	}
 	
 	
-	/*
+	/**
 	 * Name Sorter
 	 */
 	class NameSorter extends ViewerSorter {
@@ -160,7 +138,7 @@ public class ListView extends ViewPart {
 		contributeToActionBars();
 	}
 
-	/*
+	/**
 	 * Hook Context Menu
 	 */
 	private void hookContextMenu() {
@@ -176,7 +154,7 @@ public class ListView extends ViewPart {
 		getSite().registerContextMenu(menuMgr, viewer);
 	}
 
-	/*
+	/**
 	 * Contribute To Action Bars
 	 */
 	private void contributeToActionBars() {
@@ -185,7 +163,7 @@ public class ListView extends ViewPart {
 		fillLocalToolBar(bars.getToolBarManager());
 	}
 
-	/*
+	/**
 	 * Fill Local Pull Down
 	 */
 	private void fillLocalPullDown(IMenuManager manager) {
@@ -195,7 +173,7 @@ public class ListView extends ViewPart {
 	}
 
 	
-	/*
+	/**
 	 * Fill Context Menu
 	 */
 	private void fillContextMenu(IMenuManager manager) {
@@ -205,7 +183,7 @@ public class ListView extends ViewPart {
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 	
-	/*
+	/**
 	 * Fill Local Toolbar
 	 */
 	private void fillLocalToolBar(IToolBarManager manager) {
@@ -213,7 +191,7 @@ public class ListView extends ViewPart {
 		manager.add(action2);
 	}
 
-	/*
+	/**
 	 * Make Actions
 	 */
 	private void makeActions() {
@@ -227,7 +205,7 @@ public class ListView extends ViewPart {
 		action1.setText("Info");
 		action1.setToolTipText("Info");
 		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-			getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		
 		
 		//Action2: clear the log and refresh the listview
@@ -242,6 +220,8 @@ public class ListView extends ViewPart {
 		action2.setToolTipText("Clear");
 		action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
+		
+		//Double Click Action
 		doubleClickAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
