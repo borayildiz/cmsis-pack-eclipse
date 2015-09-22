@@ -8,7 +8,7 @@ or constructor, you need to call related log method.
 #Example Usage
 1.) Run Eclipse application to test plugins.  
 2.) Open preferences page in Eclipse.  
-3.) Select CMSIS Packs.  
+3.) Select CMSIS Packs section.  
 4.) Close the preference page.  
 5.) In the LoggerView plugin click the Info button. You will see that which
 constructors and methods are called when you open the CMSIS Packs page.
