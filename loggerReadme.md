@@ -11,4 +11,4 @@ or constructor, you need to call related log method.
 3.) Select CMSIS Packs.
 4.) Close the preference page.
 5.) In the LoggerView plugin click the Info button. You will see that which
-constructors and methods called when you open the CMSIS Packs page.
+constructors and methods are called when you open the CMSIS Packs page.
